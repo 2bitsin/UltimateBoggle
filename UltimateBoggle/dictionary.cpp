@@ -1,5 +1,6 @@
 #include "dictionary.hpp"
 #include <fstream>
+#include <cassert>
 
 ultimate_boggle::dictionary::dictionary (const std::string& s_file):
     m_data (nullptr),
@@ -42,17 +43,19 @@ ultimate_boggle::dictionary::match_type
     }
 
     std::uint8_t s_index = s_next - 'A';
+    assert (s_index < 26u);
+
     const auto* s_node = (const std::uint32_t*)s_state;
 
-    const auto s_mask = s_node [0] & 0x7fffffffu;
+    const auto s_mask = s_node [0];
     if (check_bit (s_mask, s_index)) {
         auto i = 0u, j = 0u;
-        while (i < 26u && j != s_index) {
+        while (i < s_index) {
             if (check_bit (s_mask, i)) ++j;
             ++i;
         }
         s_state = m_data.get () + s_node [1u + j];
-        return s_node [0] & 0x80000000 
+        return check_bit (s_node [0], 31u) 
              ? match_type_full 
              : match_type_partial;
     }

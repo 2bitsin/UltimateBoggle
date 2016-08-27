@@ -5,3 +5,4 @@
 .vs/*
 *.base64
 *.orig
+*.ub32

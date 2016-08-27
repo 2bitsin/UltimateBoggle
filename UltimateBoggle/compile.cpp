@@ -2,12 +2,33 @@
 #include "dictionary.hpp"
 #include "trie.hpp"
 
+#include <iostream>
+#include <iomanip>
+
 #include <fstream>
 #include <type_traits>
 #include <string>
 #include <algorithm>
 #include <vector>
 #include <cassert>
+
+std::string to_base (std::uint64_t value, std::uint8_t base, std::uint8_t mindigits) {
+    std::string s_output;
+
+    if (base > 64) {
+        base = 64;
+    }
+
+    do {
+        s_output = ("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#*"[value % base]) + s_output;
+        value /= base;
+        --mindigits;
+    }
+    while (value > 0 || mindigits > 0);
+
+    return s_output;
+}
+
 
 typedef ultimate_boggle::trie<char, 'A', 'Z'> trie_type;
 
@@ -33,20 +54,28 @@ struct dictionary_serializer {
     std::uint32_t write_recursive (const trie_type::node* s_node, std::string s_string = "") {
         std::uint32_t s_mask = 0u;
         std::vector<std::uint32_t> s_node_offsets;
-
         s_node_offsets.reserve (32u);
-        for (auto i = 0u; i < std::size (s_node->children); ++i) {
-            const auto& s_next = s_node->children [i];
-            s_mask >>= 1u;
+
+
+        const auto s_children = std::size (s_node->children);
+        for (auto i = 0u; i < s_children; ++i) {
+            const auto& s_next = s_node->children [i];           
             if (s_next == nullptr)
                 continue;
-            s_mask |= (1u << 25u);
+            s_mask |= (1u << i);
             const auto s_offs = write_recursive (s_next.get (), s_string + char ('A' + i));
             s_node_offsets.emplace_back (s_offs);
         }
 
         if (s_node->is_full_match) {
             s_mask |= 0x80000000;
+        }
+
+        std::string s_padding (s_string.length (), ' ');
+        std::cout << s_padding << "s : " << s_string <<  "\n";
+        std::cout << s_padding << "m : " << to_base (s_mask, 2, 32) <<  "\n";
+        for (auto i = 0u; i < s_node_offsets.size (); ++i) {
+            std::cout << s_padding << i << " : " << to_base (s_node_offsets [i], 16, 8) <<  "\n";
         }
 
         const auto s_offset = (std::uint32_t)m_node_stream.tellp ();
