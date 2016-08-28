@@ -7,7 +7,7 @@
 namespace ultimate_boggle {
 
     struct dictionary {
-        typedef const std::uint8_t* state_type;
+        typedef std::uint32_t state_type;
 
         enum match_type {
             match_type_none,

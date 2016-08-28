@@ -6,3 +6,4 @@
 *.base64
 *.orig
 *.ub32
+*.cache

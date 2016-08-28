@@ -1,6 +1,7 @@
 #pragma once
 
-#include <forward_list>
+#include <deque>
+#include <vector>
 #include "dictionary.hpp"
 #include "board.hpp"
 
@@ -11,7 +12,7 @@ namespace ultimate_boggle {
         :   m_dictionary (s_dictionary)
         {}
 
-        void solve (const board& s_board, std::forward_list<const char*>&);
+        void solve (const board& s_board, std::vector<const char*>&);
 
     private:        
         dictionary& m_dictionary;        

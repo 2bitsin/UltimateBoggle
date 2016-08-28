@@ -74,6 +74,10 @@ namespace ultimate_boggle {
 
 #endif
 
+    inline bool check_bit (std::uint32_t s_mask, std::uint32_t s_bit) {
+        return !!(s_mask & (1u << s_bit));
+    }
+
     template <typename _Ttype = std::chrono::milliseconds, typename _Function>
     auto time (_Function&& s_func) {
         auto t0 = std::chrono::high_resolution_clock::now ();
@@ -82,6 +86,5 @@ namespace ultimate_boggle {
         return std::chrono::duration_cast<_Ttype>(t1 - t0).count ();
     }
 
-    #define TIMEIT(...) std::cout << #__VA_ARGS__ << "\nTook : " << time([&] () {__VA_ARGS__;}) << " ms."
-
+    #define TIMEIT(...) std::cout << #__VA_ARGS__ << "\nTook : " << time([&] () {__VA_ARGS__;}) << " ms.\n"
 }
