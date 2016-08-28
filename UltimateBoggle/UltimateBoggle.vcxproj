@@ -125,15 +125,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="borad.cpp" />
+    <ClCompile Include="board.cpp" />
     <ClCompile Include="compile.cpp" />
     <ClCompile Include="dictionary.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="solver_dfs.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="borad.hpp" />
+    <ClInclude Include="board.hpp" />
     <ClInclude Include="compile.hpp" />
     <ClInclude Include="dictionary.hpp" />
+    <ClInclude Include="solver_dfs.hpp" />
     <ClInclude Include="trie.hpp" />
     <ClInclude Include="utils.hpp" />
   </ItemGroup>

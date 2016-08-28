@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <cctype>
+#include <chrono>
 
 namespace ultimate_boggle {
     inline std::string to_upper (std::string value) {
@@ -72,5 +73,15 @@ namespace ultimate_boggle {
     }
 
 #endif
+
+    template <typename _Ttype = std::chrono::milliseconds, typename _Function>
+    auto time (_Function&& s_func) {
+        auto t0 = std::chrono::high_resolution_clock::now ();
+        s_func ();
+        auto t1 = std::chrono::high_resolution_clock::now ();
+        return std::chrono::duration_cast<_Ttype>(t1 - t0).count ();
+    }
+
+    #define TIMEIT(...) std::cout << #__VA_ARGS__ << "\nTook : " << time([&] () {__VA_ARGS__;}) << " ms."
 
 }

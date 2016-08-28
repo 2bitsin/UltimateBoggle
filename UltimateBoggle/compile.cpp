@@ -69,9 +69,8 @@ struct dictionary_serializer {
         write (s_mask);
         write (s_node_offsets);
 
-        if (s_node->is_full_match) {
-            assert (s_string.size () <= 256u);
-            s_string = static_cast<char> (s_string.size () - 1u) + s_string;
+        if (s_node->is_full_match) {            
+            s_string.push_back ('\0');
             const auto s_len = ((s_string.length () + 3u) & ~std::size_t (3u));
             while (s_string.length () < s_len)
                 s_string.push_back ('\0');

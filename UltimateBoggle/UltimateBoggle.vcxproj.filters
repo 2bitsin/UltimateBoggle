@@ -24,7 +24,10 @@
     <ClCompile Include="compile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="borad.cpp">
+    <ClCompile Include="board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solver_dfs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +44,10 @@
     <ClInclude Include="utils.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="borad.hpp">
+    <ClInclude Include="solver_dfs.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="board.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -122,16 +122,15 @@ void ultimate_boggle::dictionary::unsee_all () {
     unsee_branch (root ());
 }
 
-const std::string ultimate_boggle::dictionary::string_at_node (state_type s_state) {
+const char* ultimate_boggle::dictionary::cstring_at_node (state_type s_state) const {
     using namespace ultimate_boggle;
     const auto* s_node = (const std::uint32_t*)s_state;
     if (check_bit (s_node [0], 31u)) {
         auto s_child_count = popcount (s_node [0] & st_slot_bitmask);
         const auto* s_string = s_state + sizeof (std::uint32_t) * (1u + s_child_count);
-        const auto s_length = *s_string;        
-        return std::string (s_string + 1u, s_string + 2u + s_length);
+        return (const char*)s_string;
     }
-    throw std::runtime_error ("No string bound to this node");
+    return nullptr;
 }
 
 ultimate_boggle::dictionary::state_type 

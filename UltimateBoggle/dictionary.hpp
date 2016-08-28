@@ -26,7 +26,7 @@ namespace ultimate_boggle {
         void unsee_branch (state_type s_branch);
         void unsee_all ();
         
-        const std::string string_at_node (state_type);
+        const char* cstring_at_node (state_type) const;
         state_type root () const;
 
     private:
