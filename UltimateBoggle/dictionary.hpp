@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <forward_list>
 
 namespace ultimate_boggle {
 
@@ -15,16 +16,22 @@ namespace ultimate_boggle {
         };
 
         dictionary (const std::string& s_file);
-
+        
         match_type next (state_type& s_state, char s_next) const;
-        match_type find (const std::string& s_key) const;
-
+        match_type match (const std::string& s_key) const;
+        match_type match (const std::string& s_key, state_type &s_state) const;
+       
+        bool seen (state_type s_state);
+        void unsee (state_type s_state);
+        void unsee_branch (state_type s_branch);
+        void unsee_all ();
+        
         const std::string string_at_node (state_type);
+        state_type root () const;
 
     private:
         std::unique_ptr<std::uint8_t []> m_data;
-        std::uint8_t* m_root;
-        std::size_t m_length;
+        std::size_t m_length;           
     };
 
 }

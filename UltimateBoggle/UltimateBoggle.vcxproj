@@ -125,14 +125,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="borad.cpp" />
     <ClCompile Include="compile.cpp" />
     <ClCompile Include="dictionary.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="borad.hpp" />
     <ClInclude Include="compile.hpp" />
     <ClInclude Include="dictionary.hpp" />
     <ClInclude Include="trie.hpp" />
+    <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

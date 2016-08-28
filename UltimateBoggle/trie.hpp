@@ -44,7 +44,7 @@ namespace ultimate_boggle {
             s_curr->is_full_match = true;
         }
 
-        match_type find (const std::basic_string<value_type>& s_word) const {
+        match_type match (const std::basic_string<value_type>& s_word) const {
             node* s_curr = nullptr;
             auto s_match = match_type_none;
             for (const auto& s_char : s_word) {
@@ -65,9 +65,7 @@ namespace ultimate_boggle {
 
             s_node = s_node->children [s_char - value_first];
             if (s_node != nullptr) {
-                return s_node->is_full_match
-                    ? match_type_full
-                    : match_type_partial;
+                return s_node->is_full_match ? match_type_full : match_type_partial;
             }
             return match_type_none;
         }

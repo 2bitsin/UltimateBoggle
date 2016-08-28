@@ -24,6 +24,9 @@
     <ClCompile Include="compile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="borad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dictionary.hpp">
@@ -33,6 +36,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="compile.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="borad.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
