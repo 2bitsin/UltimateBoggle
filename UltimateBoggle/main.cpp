@@ -39,8 +39,8 @@ int main () try {
         assert (s_dictionary.match (s_wordlist0 [i]) == dictionary::match_type_full);
         assert (s_wordlist0 [i] == s_wordlist1 [i]);
     }
-*/    
-
+*/
+    
     std::vector<const char*> s_wordlist;
     solver_recursive s_solver (s_dictionary); 
     s_solver.solve (s_board, s_wordlist);
@@ -51,7 +51,6 @@ int main () try {
             s_wordlist.clear ();
         }
     );
-
 
     return 0;
 }

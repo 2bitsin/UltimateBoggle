@@ -11,8 +11,8 @@ namespace ultimate_boggle {
 
     struct solver_recursive {
         typedef std::int16_t coord_type;
-        typedef std::vector<bool> checkbox_type;
-        typedef std::deque<dictionary::state_type> state_list_type;
+        typedef std::unique_ptr<std::uint64_t []> checkbox_type;
+        typedef std::vector<dictionary::state_type> state_list_type;
 
         solver_recursive (dictionary& s_dict);
         
