@@ -20,10 +20,11 @@ void solver_recursive::solve (const board& s_board, std::vector<const char*>& s_
     auto&& s_context = std::tie (s_board, s_seen, s_visited);
     for (auto j = 0; j < s_board.height (); ++j) {
         for (auto i = 0; i < s_board.width (); ++i) {
-            solve_step (s_context, 0u, i, j);
+            solve_step (s_context, m_dictionary.root (), i, j);
         }
     }
 
+    s_list.reserve (s_seen.size () + 10);
     for (const auto& s_node : s_seen) {
         m_dictionary.unsee (s_node);
         s_list.emplace_back (m_dictionary.cstring_at_node (s_node));
@@ -49,7 +50,7 @@ inline bool get_bit (const solver_recursive::checkbox_type& s_cbox, std::uint32_
 }
 
 inline bool is_valid_coords (
-    const board& s_board,
+    const board& s_board,    
     const solver_recursive::checkbox_type& s_visited,
     solver_recursive::coord_type x, 
     solver_recursive::coord_type y) 
@@ -69,8 +70,7 @@ void ultimate_boggle::solver_recursive::solve_step (
     auto&& s_seen = std::get<state_list_type&> (s_context);
 
     auto s_new_state = s_state;
-    const auto s_result = m_dictionary.next (s_new_state, s_board (s_posx, s_posy));
-    switch (s_result) {
+    switch (m_dictionary.next (s_new_state, s_board (s_posx, s_posy))) {
         case dictionary::match_type_none:
         {
             return;

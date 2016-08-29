@@ -18,8 +18,8 @@ namespace ultimate_boggle {
         dictionary (const std::string& s_file);
         
         match_type next (state_type& s_state, char s_next) const;
-        match_type match (const std::string& s_key) const;
-        match_type match (const std::string& s_key, state_type &s_state) const;
+        match_type match (const char* s_key) const;
+        match_type match (const char* s_key, state_type &s_state) const;
        
         bool seen (state_type s_state);
         void unsee (state_type s_state);

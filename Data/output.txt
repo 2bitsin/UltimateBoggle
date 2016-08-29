@@ -1,2 +1,2 @@
 for (auto i = 0; i < 10; ++i) { s_solver.solve (s_board, s_wordlist); s_wordlist.clear (); }
-Took : 1343 ms.
+Took : 1147 ms.

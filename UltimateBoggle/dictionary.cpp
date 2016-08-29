@@ -47,41 +47,42 @@ ultimate_boggle::dictionary::match_type
 {
     using namespace ultimate_boggle;
 
-    std::uint8_t s_index = s_next - 'A';
+    const auto s_index = (std::uint8_t)s_next; 
     assert (s_index < 26u);
 
-    if (s_state == dictionary::state_type ()) {
-        s_state = root ();
-    }    
+    //if (s_state == dictionary::state_type ()) {
+    //    s_state = root ();
+    //}    
     
     const auto* s_node = (const std::uint32_t*)&m_data [s_state];
+    const auto s_mask = *s_node;
 
-    const auto s_mask = s_node [0];
-    if (check_bit (s_mask, s_index)) {
-        auto j = popcount (s_mask & ((1u << s_index) - 1u));
-        s_state = s_node [1u + j];
-        s_node = (const std::uint32_t*)&m_data [s_state];
-        return check_bit (s_node [0], 31u) 
-             ? match_type_full 
-             : match_type_partial;
+    if (!check_bit (s_mask, s_index)) {        
+        return match_type_none;
     }
+    
+    const auto j = 1u + popcount (s_mask & ((1u << s_index) - 1u));
+    s_state = s_node [j];
+    s_node = (const std::uint32_t*)&m_data [s_state];
+    return check_bit (*s_node, 31u)
+         ? match_type_full
+         : match_type_partial;
 
-    return match_type_none;
 }
 
 ultimate_boggle::dictionary::match_type 
-    ultimate_boggle::dictionary::match (const std::string& s_key) const 
+    ultimate_boggle::dictionary::match (const char* s_key) const 
 {
-    auto s_state = dictionary::state_type ();
+    auto s_state = root ();
     return match (s_key, s_state);
 }
 
 ultimate_boggle::dictionary::match_type
-    ultimate_boggle::dictionary::match (const std::string& s_key, state_type& s_state) const
+    ultimate_boggle::dictionary::match (const char* s_key, state_type& s_state) const
 {    
     auto s_match = match_type_none;
-    for (const auto& s_char : s_key) {
-        s_match = next (s_state, s_char);
+    for (auto i = s_key; *i != '\0'; ++i) {
+        s_match = next (s_state, *i - 'A');
         if (s_match == match_type_none) {
             return match_type_none;
         }

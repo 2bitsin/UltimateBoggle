@@ -55,7 +55,7 @@ void ultimate_boggle::solver_dfs::solve (const board& s_board, std::vector<const
 
     for (coord_type j = 0; j < s_board.height (); ++j) {
         for (coord_type i = 0; i < s_board.width (); ++i) {
-            auto s_state = dictionary::state_type ();
+            auto s_state = m_dictionary.root ();
             auto s_reslut = m_dictionary.next (s_state, s_board (i, j));
             if (s_reslut != dictionary::match_type_none) {
                 s_all_states.emplace_back (i, j, s_state, nullptr);

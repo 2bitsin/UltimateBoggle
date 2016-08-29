@@ -60,18 +60,34 @@ namespace ultimate_boggle {
     inline auto popcount (std::uint32_t value) { return __builtin_popcountl (value); }
     inline auto popcount (std::uint64_t value) { return __builtin_popcountll (value); }
 
-#else
-
-    template <typename T>
-    inline std::uint8_t popcount (T value) {
-        std::uint8_t s_pcnt = 0u;
-        while (value) {
-            s_pcnt += (value&1);
-            value >>= 1u;
-        }
-        return s_pcnt;
+#else    
+    inline std::uint32_t popcount (std::uint16_t vv) {
+        std::uint32_t v = vv;
+        std::uint32_t c = ((v & 0xfff) * 0x1001001001001ULL & 0x84210842108421ULL) % 0x1f;
+        c += (((v & 0xfff000) >> 12) * 0x1001001001001ULL & 0x84210842108421ULL) % 0x1f;
+        return c;
     }
 
+    inline std::uint32_t popcount (std::uint32_t v) {        
+        std::uint32_t c = ((v & 0xfff) * 0x1001001001001ULL & 0x84210842108421ULL) % 0x1f;
+        c += (((v & 0xfff000) >> 12) * 0x1001001001001ULL & 0x84210842108421ULL) % 0x1f;
+        c += ((v >> 24) * 0x1001001001001ULL & 0x84210842108421ULL) % 0x1f;
+        return c;
+    }
+
+    /*
+    inline std::uint32_t popcount (std::uint32_t v) {
+        std::uint32_t c;
+        for (c = 0; v; c++) {
+            v &= v - 1; // clear the least significant bit set
+        }        
+        return c;
+    }*/
+
+    inline std::uint32_t popcount (std::uint64_t v) {        
+        return popcount (v >> 32u) + popcount (v & ((1ull << 32u) - 1u));
+    }
+    
 #endif
 
     inline bool check_bit (std::uint32_t s_mask, std::uint32_t s_bit) {

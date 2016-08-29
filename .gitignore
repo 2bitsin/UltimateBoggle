@@ -7,3 +7,6 @@
 *.orig
 *.ub32
 *.cache
+*.vsp
+*.vspx
+*.etl
