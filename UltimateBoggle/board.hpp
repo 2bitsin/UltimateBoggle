@@ -15,7 +15,11 @@ namespace ultimate_boggle {
         auto width  () const { return m_width;  }
         auto height () const { return m_height; }
 
-        const auto& operator () (std::int32_t x, std::int32_t y) const {
+        auto operator [] (std::size_t i) const {
+            return m_data [i];
+        }
+
+        auto operator () (std::int32_t x, std::int32_t y) const {
             assert (x >= 0 && x < m_width && y >= 0 && y < m_height);
             return m_data [x + y*m_width];
         }
