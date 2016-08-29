@@ -30,6 +30,9 @@
     <ClCompile Include="solver_dfs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solver_recursive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dictionary.hpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="board.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solver_recursive.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

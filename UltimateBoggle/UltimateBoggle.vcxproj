@@ -132,12 +132,14 @@
     <ClCompile Include="dictionary.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="solver_dfs.cpp" />
+    <ClCompile Include="solver_recursive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.hpp" />
     <ClInclude Include="compile.hpp" />
     <ClInclude Include="dictionary.hpp" />
     <ClInclude Include="solver_dfs.hpp" />
+    <ClInclude Include="solver_recursive.hpp" />
     <ClInclude Include="trie.hpp" />
     <ClInclude Include="utils.hpp" />
   </ItemGroup>
